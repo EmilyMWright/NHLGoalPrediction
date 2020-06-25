@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 event_headers = ['play_id', 'game_id', 'team_id_for', 'team_id_against', 'event', 'st_x', 'st_y', 'period', 'periodTime']
 event_df = pd.read_csv('game_plays.csv', usecols = event_headers)
@@ -17,4 +18,8 @@ team_id_dict = {1:'NJD', 2:'NYI', 3:'NYR', 4:'PHI', 5:'PIT', \
 event_df.team_id_for.replace(team_id_dict, inplace=True)
 event_df.team_id_against.replace(team_id_dict, inplace=True)
 
-print(event_df.head())
+goal_df = event_df[event_df.event.isin(['Goal'])].reset_index()
+goal_foff_df = event_df[event_df.event.isin(['Goal', 'Faceoff'])].reset_index()
+foff_indices = goal_foff_df[goal_foff_df.event == 'Goal'].index - 1
+
+goal_foff_df = goal_foff_df.iloc[foff_indices]
