@@ -8,4 +8,6 @@
 
  To begin, a monitoring time and warning time must be selected. The monitoring time indicates the length of the sub-sequence of events that the algorithm considers at any one instant. Typically, a longer monitoring time leads to better predictions, however too large of a monitoring time would lead to meaningless predictions. The warning time is the minimum length of time prior to a goal at which a prediction is useful.
 
- The warning time was determined using the average time between a goal and the last faceoff prior to the goal. This pause in play will allow coaches to change up players or even take a time out if it seems that a goal is iminent. The WarningTime module found the mean time to be 55 seconds.
+ The warning time was determined using the average time between a goal and the last faceoff prior to the goal. This pause in play will allow coaches to change up players or even take a time out if it seems that a goal is iminent. The WarningTime script found the mean time to be 55 seconds.
+
+ The monitoring time will be calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff to occur will likely be the last before the goal is likely to occur.
