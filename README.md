@@ -10,4 +10,4 @@
 
  The warning time was determined using the average time between a goal and the last faceoff prior to the goal. This pause in play will allow coaches to change up players or even take a time out if it seems that a goal is iminent. The WarningTime script found the mean time to be 55 seconds.
 
- The monitoring time will be calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff to occur will likely be the last before the goal is likely to occur.
+ The monitoring time was be calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff to occur will probably be the last before the goal is likely to occur. The MonitoringTime script found the average time to be 1 minute.
