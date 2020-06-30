@@ -13,3 +13,5 @@
  The monitoring time was be calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff to occur will probably be the last before the goal is likely to occur. The MonitoringTime script found the average time to be 60 seconds.
 
  Next the data was split into training and evaluation sets. The pandas DataFrame sample method was used to return 9000 unique game ids. The games corresponding to these ids were saved the train_plays.csv while the remainder were saved to eval_plays.csv.
+
+ For each goal in the training set, the event sequence in the monitoring time (60 seconds) which ended at the warning time (55 seconds) prior to said goal was recorded in a csv.
