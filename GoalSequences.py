@@ -29,14 +29,14 @@ with open('goal_sequences.csv', 'w', newline='') as f:
                 min_t = t - 115
             else:
                 min_t = 0
-            while (event_df.iloc[i].periodTime > max_t):
-                i = i - 1
             while (event_df.iloc[i].periodTime > min_t):
+                i = i - 1
+            while (event_df.iloc[i].periodTime < max_t):
                 if event_df.iloc[i].team_id_for == team:
                     sequence.append('O' + event_df.iloc[i].event)
                 else:
                     sequence.append('D' + event_df.iloc[i].event)
-                i = i - 1
+                i = i + 1
             writer.writerow(sequence)
     
 
