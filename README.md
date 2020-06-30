@@ -14,4 +14,4 @@
 
  Next the data was split into training and evaluation sets. The pandas DataFrame sample method was used to return 9000 unique game ids. The games corresponding to these ids were saved the train_plays.csv while the remainder were saved to eval_plays.csv.
 
- For each goal in the training set, the event sequence in the monitoring time (60 seconds) which ended at the warning time (55 seconds) prior to said goal was recorded in a csv.
+ For each goal in the training set, the event sequence in the monitoring time (60 seconds) which ended at the warning time (55 seconds) prior to said goal was recorded in a csv. On average, there were 5 plays in the sequence of interest with a maximum length of 24 plays. To capture most sequences (about 88%), all those of length 3 or greater will be considered as potential goal indicators.
