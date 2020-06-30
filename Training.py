@@ -5,4 +5,5 @@ for i in range(12):
     headers.append("Play" + str(i + 1))
 
 leadup_df = pd.read_csv('goal_sequences.csv', names = headers)
-print(leadup_df.count(axis='columns').mean())
+count_df = leadup_df.count(axis='columns')
+print(100*count_df[count_df >= 3].count()/count_df.count())
