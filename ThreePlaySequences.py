@@ -1,8 +1,8 @@
 import pandas as pd
 import csv
 
-headers = []
-for i in range(24):
+headers = ['play_id']
+for i in range(25):
     headers.append("Play" + str(i + 1))
 
 leadup_df = pd.read_csv('goal_sequences.csv', names = headers)
@@ -13,7 +13,7 @@ with open('three_play_sequences.csv', 'w', newline='') as f:
 
     for index, seq in leadup_df.iterrows():
         for i in range(seq.count() - 2):
-            three_plays = []
+            three_plays = [seq.play_id]
             three_plays.append(seq["Play" + str(i + 1)])
             three_plays.append(seq["Play" + str(i + 2)])
             three_plays.append(seq["Play" + str(i + 3)])
