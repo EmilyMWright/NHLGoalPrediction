@@ -29,6 +29,6 @@ for sub_str in sequences_df['OneString']:
 sequences_df['Frequency'] = freqs
 sequences_df['IncludedIn'] = p_id_lists
 print(sequences_df.sort_values(['Frequency'], ascending=False).head())
-sequences_df.Frequency.nlargest(200).to_csv('top_three_play_sequences.csv')
+sequences_df.nlargest(200, columns = 'Frequency').to_csv('top_three_play_sequences.csv')
 
     
