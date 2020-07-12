@@ -10,35 +10,38 @@ events = ['Faceoff', 'Giveaway', 'Blocked Shot', 'Shot', 'Hit', 'Goal', 'Penalty
 event_df = event_df[event_df.event.isin(events)].reset_index()
 goal_df = event_df[event_df.event == 'Goal'].reset_index()
 
-# saves goal lead-up sequences to csv
-indices = goal_df.level_0
-times = goal_df.periodTime
-teams = goal_df.team_id_for
-p_ids = goal_df.play_id
+goals = pd.read_csv('top_three_play_sequences.csv').IncludedIn
 
-with open('between_sequences.csv', 'w', newline='') as f:
-    writer = csv.writer(f)
+warned_goals = []
+for goal in goals:
+    warned_goals += eval(goal)
 
-    for j in range(len(goal_df)):
-        i = indices[j]
-        if j > 0:
-            k = indices[j-1]
-        else:
-            k = 0
-        
-        t = times[j]
-        team = teams[j]
-        p_id = p_ids[j]
-        sequence = []
-        if t > 115:
-            sequence.append(p_id)
-            min_t = t - 115
-            while (event_df.iloc[i].periodTime > min_t):
-                i = i - 1
-            while ((event_df.iloc[i].periodTime > 0) & (i > k)):
-                if event_df.iloc[i].team_id_for == team:
-                    sequence.append('O' + event_df.iloc[i].event)
-                else:
-                    sequence.append('D' + event_df.iloc[i].event)
-                i = i - 1
-            writer.writerow(sequence)
+warned_goals = list(set(warned_goals))
+
+warned_goals_df = event_df[event_df.play_id.isin(warned_goals)]
+
+indices = warned_goals_df.index
+times = warned_goals_df.periodTime.to_list()
+
+to_drop = []
+for j in len(warned_goals):
+    i = indices[j] - 1
+    t = times[j]
+    if t > 115:
+        min_t = t - 115
+    else:
+        min_t = 0
+
+    prev_t = 1200
+    
+    while ((t > min_t) & (t < prev_t) & (i > 0)):
+        to_drop += i
+        i = i - 1
+        prev_t = t
+        t = event_df.iloc[i].periodTime
+
+event_df.drop(to_drop, inplace = True)
+
+period_dfs = event_df.groupby(['game_id', 'period'])
+
+
