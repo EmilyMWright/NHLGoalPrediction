@@ -14,7 +14,8 @@ def monitoring_time(event_df):
     print("The average time between faceoffs is", time_between_faceoffs, "seconds.")
 
 def main():
-    event_df = pd.read_csv('updated_train_plays.csv')
+    event_headers = ['event', 'game_id', 'periodTime', 'period','next_goal_id', 'time_to_goal']
+    event_df = pd.read_csv('updated_train_plays.csv', usecols = event_headers)
     warning_time(event_df)
     monitoring_time(event_df)
 
