@@ -14,7 +14,6 @@ def unique_sequences(event_df):
 
 def main():
     event_headers = ['time_to_goal', 'next_goal_id', 'next_goal_attr', 'event_seq', 'attr_event_seq']
-    # event_df = pd.read_csv('updated_train_plays.csv', usecols = event_headers, true_values = ['True'], false_values = ['False'])
     event_df = pd.read_csv('updated_train_plays.csv', usecols = event_headers)
     event_df.dropna(subset = ['event_seq','attr_event_seq'], inplace = True)
     event_df.event_seq = [ast.literal_eval(seq) for seq in event_df.event_seq]

@@ -39,7 +39,7 @@ def add_period_cols(period_df):
 def attribute_events(game_df):
     ''' Add columns attributing each event to team A (wins first faceoff) or B and return updated dataframe '''
     a_team = game_df.iloc[0].team_id_for
-    game_df['attr_event'] = np.where(game_df.team_id_for == a_team, 'A', 'B')
+    game_df['attr_event'] = np.where(game_df.team_id_for == a_team, True, False)
 
 def add_game_cols(game_df):
     ''' Call functions to add columns to dataframe representing one NHL game and return updated dataframe '''
