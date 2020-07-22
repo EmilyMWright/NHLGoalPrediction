@@ -32,7 +32,7 @@ def train_accuracy(event_df):
     event_df['attr_event_seq'] = event_df.attr_event_seq.apply(tuple)
     unique_df = event_df.groupby(['event_seq','attr_event_seq'])
 
-    all_count_df = unique_df.size().reset_index(name = 'occurances').sort_values(by = 'occurances', ascending = False)
+    all_count_df = unique_df.size().reset_index(name = 'total_occurances').sort_values(by = 'total_occurances', ascending = False)
     
     return all_count_df
 
@@ -48,8 +48,11 @@ def main():
     mon_seq_count_df = train_frequency(event_df.dropna(subset = ['next_goal_attr']))
     all_seq_count_df = train_accuracy(event_df)
 
-    print(mon_seq_count_df.head())
-    print(all_seq_count_df.head())
+    eval_df = pd.merge(mon_seq_count_df, all_seq_count_df, how='outer')
+    eval_df['percent'] = 100*eval_df.occurances/eval_df.total_occurances
+    eval_df.sort_values(by = ['percent', 'occurances', 'total_occurances'], ascending = False, inplace = True)
+
+    print(eval_df.head(n = 200).to_string())
 
 if __name__ == '__main__':
     main()
