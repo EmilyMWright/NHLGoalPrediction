@@ -12,8 +12,17 @@
 
  A monitoring time and warning time were selected. The monitoring time indicates the window of events that the algorithm considers at any one instant. Typically, a longer monitoring time leads to better predictions, however too large of a monitoring time would lead to meaningless predictions. The warning time is the minimum length of time prior to a goal at which a prediction is useful.
 
- The monitoring time was be calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff to occur will probably be the last before the goal is likely to occur. The monitoring time was found to be 64.5 seconds, which rounds easily to one minute.
+ The monitoring time was calculated from the average time between faceoffs. Thus, it will be that once a potential "goal-leading" sequence has been identified, the next faceoff will probably be the last before the goal is likely to occur. The monitoring time was found to be 64.5 seconds, which rounds easily to one minute.
 
  The warning time was determined using the average time between a goal and the last faceoff prior to the goal. This pause in play will allow coaches to change up players or even take a time out if it seems that a goal is iminent. The warning time was found to be 61.3 seconds, which was also rounded to one minute.
+
+ There are two conditions which make a sequence of events a good candidate for predicting goals.
+ 1. Frequency: the sequence occurs in the lead-up to many goals
+ 2. Accuracy: the sequence does not often occur if no goal is forthcoming
+
+ The training algorithm identified all three play sequences which occurred between 2 minutes and 1 minute prior to a goal in the training data. It is important to note that each play in a sequence consisted of both an event (Faceoff, Giveaway, Blocked Shot, Shot, Hit, Goal, Penalty, Takeaway, Missed Shot) and a team (goal scoring or defending). The algorithm then searched for the identified sequences in all three play sequences which were not in the lead-up to a goal in order to find false positives. In this case, there was no goal scoring team, so each sequence of events corresponded to two sequences of plays (one for each team in the game to be considered the potential goal scorer). 
+
+ ### Results
+ ...TODO
 
  
