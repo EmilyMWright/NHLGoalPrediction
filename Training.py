@@ -2,15 +2,6 @@ import pandas as pd
 import ast
 import numpy as np
 
-# def warned_goals(top_sequences, event_df):
-#     unique_event_df = event_df.groupby(['event_seq','attr_event_seq'])
-#     warned_goals = []
-#     for top_seq in top_sequences:
-#         top_seq_df = unique_event_df.get_group((top_seq.event_seq, top_seq.attr_event_seq))
-#         warned_goals.append(top_seq_df.next_goal_attr)
-
-#     return set(warned_goals)
-
 def train_frequency(event_df):
     mon_df = event_df[(event_df.time_to_goal < 120) & (event_df.time_to_goal > 60)]
     mon_df['attr_event_seq'] = [~np.logical_xor(team, seq) for team, seq in 
@@ -52,6 +43,7 @@ def main():
     eval_df['percent'] = 100*eval_df.occurances/eval_df.total_occurances
     eval_df.sort_values(by = ['percent', 'occurances', 'total_occurances'], ascending = False, inplace = True)
 
+    eval_df.to_csv('eval_sequences.csv')
     print(eval_df.head(n = 200).to_string())
 
 if __name__ == '__main__':
