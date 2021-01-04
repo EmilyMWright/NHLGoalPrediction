@@ -3,7 +3,7 @@ import ast
 import numpy as np
 
 def train_frequency(event_df):
-    mon_df = event_df[(event_df.time_to_goal < 120) & (event_df.time_to_goal > 60)]
+    mon_df = event_df[(event_df.time_to_goal < 30) & (event_df.time_to_goal > 0)]
     mon_df['attr_event_seq'] = [~np.logical_xor(team, seq) for team, seq in 
                                         zip(mon_df.next_goal_attr, mon_df.attr_event_seq)]
     mon_df['event_seq'] = mon_df.event_seq.apply(tuple)
@@ -43,7 +43,7 @@ def main():
     eval_df['percent'] = 100*eval_df.occurances/eval_df.total_occurances
     eval_df.sort_values(by = ['percent', 'occurances', 'total_occurances'], ascending = False, inplace = True)
 
-    eval_df.to_csv('eval_sequences.csv')
+    eval_df.to_csv('eval_sequences3.csv')
     print(eval_df.head(n = 200).to_string())
 
 if __name__ == '__main__':
